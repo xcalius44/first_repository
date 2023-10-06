@@ -1,2 +1,2 @@
 # firs_repository
-text repository 
+text repository on python
