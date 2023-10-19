@@ -1,7 +1,4 @@
-import time
-from datetime import date
+import datetime
 def times():
-    a = time.ctime().split(" ")
-    print(date.today(), a[3])
-    
+    print(datetime.datetime.now())
 times()
