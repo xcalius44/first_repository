@@ -1,6 +1,5 @@
 a = ([int(i) for i in list(input("yyyy,mm,dd: "))])
-while
-    a = sum(a)
-    if 
-
-print()
+b = sum(a)
+a = ([int(i) for i in str(b)])
+a = sum(a)   
+print(a)
