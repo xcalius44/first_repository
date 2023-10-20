@@ -17,5 +17,5 @@ def spaniel(n , days):
     elif number != n: 
         print(len(day_weeks),(day_weeks))  
         return(len(day_weeks),(day_weeks))
-print(spaniel(2, [1 ,1]) == (1, [2]))
+print(spaniel(2, [0 ,0]) == (0, []))
     
