@@ -7,12 +7,12 @@ class Pet:
     def status():
         print("Загальна кількість звірят", Pet.total)
 
-    def __init__(self, name, hunger = 0, boredom = 0, yaer = 0, count =0):
+    def __init__(self, name, hunger = 0, boredom = 0, year = 0, count =0):
         Pet.total += 1
         self.__name = name
         self.hunger = hunger
         self.boredom = boredom
-        self.yaer = yaer
+        self.year = year
         self.count = count
 
     def __pass_time(self):
@@ -69,10 +69,11 @@ class Pet:
         self.boredom -= fun
         if self.boredom < 0:
             self.boredom = 0
-    def yaer(self):
+            
+    def year_func(self):
         self.count += 1
         if self.count == 50:
-            self.yaer += 1
+            self.year += 1
         return self.count
 
 def main():
@@ -99,7 +100,7 @@ def main():
             print('game_over')
             break
         
-        if pet.yaer() == 50:
+        if pet.year_func() == 50:
             count += 1
             print('happy birthday', count)
 
