@@ -7,20 +7,15 @@ class Pet:
     def status():
         print("Загальна кількість звірят", Pet.total)
 
-    def __init__(self, name, hunger = 0, boredom = 0, yaer = 0, count =0):
+    def __init__(self, name, hunger = 0, boredom = 0):
         Pet.total += 1
         self.__name = name
         self.hunger = hunger
         self.boredom = boredom
-        self.yaer = yaer
-        self.count = count
 
     def __pass_time(self):
         self.hunger += 1
-        self.boredom += 1 
-        
-         
-           
+        self.boredom += 1     
         
     def __str__(self):
         ans = self.__name + '\n'
@@ -31,15 +26,7 @@ class Pet:
     @property
     def mood(self):
         unhappiness = self.hunger + self.boredom
-        if unhappiness < 5:
-            m = "прекрасно"
-        elif 5 <= unhappiness <= 15:
-            m = "непогано"
-        elif 16 <= unhappiness <= 25:
-            m = "не сказати щоб добре"
-        else:
-            m = 'game_over'
-        return m
+        return unhappiness
     
     @property
     def name(self):
@@ -69,15 +56,9 @@ class Pet:
         self.boredom -= fun
         if self.boredom < 0:
             self.boredom = 0
-    def yaer(self):
-        self.count += 1
-        if self.count == 50:
-            self.yaer += 1
-        return self.count
+        self.__pass_time()
 
 def main():
-    pet_name = input("Як ви назвете своє звірятко?: ")
-    pet = Pet(pet_name)
 
     choice = None  
     while choice != "0":
@@ -86,22 +67,14 @@ def main():
         Моє звірятко
     
         0 - Вийти
-        1 - Дізнатися про самопочуття звірятк
-        2 - Годувати звірятко
-        3 - Пограти зі звірятком
+        1 - Дізнатися про самопочуття звірят
+        2 - Годувати звірятка
+        3 - Пограти зі звіряткоми
+        4 - сетворити нове звірятко
         """)
-
-        count = 0
-        
+    
         choice = input("Ваш вибір: ")
         print()
-        if pet.mood == 'game_over':
-            print('game_over')
-            break
-        
-        if pet.yaer() == 50:
-            count += 1
-            print('happy birthday', count)
 
         # вихід
         if choice == "0":
@@ -109,7 +82,17 @@ def main():
 
         # бесіда зі звірятком
         elif choice == "1":
-            pet.talk()
+            unhappiness = pet.talk()
+            for i in len(list_pet):
+                
+            if unhappiness < 5:
+                print("прекрасно")
+            elif 5 <= unhappiness <= 10:
+                m = "непогано"
+            elif 11 <= unhappiness <= 15:
+                m = "не сказати щоб добре"
+            else:
+                m = "жахливо"
         
         # годування звірятка
         elif choice == "2":
@@ -120,6 +103,11 @@ def main():
         elif choice == "3":
             fan = int(input("скільки годин грати: "))
             pet.play(fan)
+        
+        elif choice == "3":
+            pet_name = input("Як ви назвете своє звірятко?: ")
+            pet = Pet(pet_name)
+            
         
         # back_door
         elif choice == "back_door":
