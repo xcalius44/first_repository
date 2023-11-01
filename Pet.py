@@ -7,20 +7,20 @@ class Pet:
     def status():
         print("Загальна кількість звірят", Pet.total)
 
-    def __init__(self, name, hunger = 0, boredom = 0, year = 0, count =0):
+    def __init__(self, name, hunger = 0, boredom = 0, age = 0, count =0):
         Pet.total += 1
         self.__name = name
         self.hunger = hunger
         self.boredom = boredom
-        self.year = year
+        self.age = age
         self.count = count
 
     def __pass_time(self):
         self.hunger += 1
         self.boredom += 1 
-        
-         
-           
+        self.count += 1
+        if self.count == 50:
+            self.age += 1
         
     def __str__(self):
         ans = self.__name + '\n'
@@ -69,12 +69,6 @@ class Pet:
         self.boredom -= fun
         if self.boredom < 0:
             self.boredom = 0
-            
-    def year_func(self):
-        self.count += 1
-        if self.count == 50:
-            self.year += 1
-        return self.count
 
 def main():
     pet_name = input("Як ви назвете своє звірятко?: ")
@@ -91,18 +85,15 @@ def main():
         2 - Годувати звірятко
         3 - Пограти зі звірятком
         """)
-
-        count = 0
         
         choice = input("Ваш вибір: ")
         print()
-        if pet.mood == 'game_over':
+        if pet.mood == 'game_over' or pet.age <= 40:
             print('game_over')
             break
         
-        if pet.year_func() == 50:
-            count += 1
-            print('happy birthday', count)
+        if pet.count == 50:
+            print('happy birthday', pet.age)
 
         # вихід
         if choice == "0":

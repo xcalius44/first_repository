@@ -1,3 +1,5 @@
+import random
+
 class Pet:
     """Віртуальний вихованець"""
     total = 0
@@ -7,11 +9,11 @@ class Pet:
     def status():
         print("Загальна кількість звірят", Pet.total)
 
-    def __init__(self, name, hunger = 0, boredom = 0):
+    def __init__(self, name):
         Pet.total += 1
         self.__name = name
-        self.hunger = hunger
-        self.boredom = boredom
+        self.hunger = random.randint(0, 7)
+        self.boredom = random.randint(0, 7)
 
     def __pass_time(self):
         self.hunger += 1
@@ -41,7 +43,6 @@ class Pet:
             print("Ім'я успішно змінено.")
 
     def talk(self):
-        print("Мене звати", self.name, ", і зараз я почуваюся", self.mood)
         self.__pass_time()
     
     def eat(self, food):
@@ -59,7 +60,7 @@ class Pet:
         self.__pass_time()
 
 def main():
-
+    list_pet: [Pet] = [Pet(i) for i in input().split()]
     choice = None  
     while choice != "0":
         print \
@@ -70,48 +71,43 @@ def main():
         1 - Дізнатися про самопочуття звірят
         2 - Годувати звірятка
         3 - Пограти зі звіряткоми
-        4 - сетворити нове звірятко
         """)
     
         choice = input("Ваш вибір: ")
         print()
-
+        lenth = len(list_pet) - 1
         # вихід
         if choice == "0":
             print("До побачення.")
 
         # бесіда зі звірятком
         elif choice == "1":
-            unhappiness = pet.talk()
-            for i in len(list_pet):
-                
-            if unhappiness < 5:
-                print("прекрасно")
-            elif 5 <= unhappiness <= 10:
-                m = "непогано"
-            elif 11 <= unhappiness <= 15:
-                m = "не сказати щоб добре"
+            for i in range(lenth):
+                unhappines =+ list_pet[i].mood
+            if unhappines <= 5*lenth:
+                print(" і зараз ми почуваемося прекрасно")
+            elif 5*lenth <= unhappines <= 10*lenth:
+                print(" і зараз ми почуваемося непогано")
+            elif 11*lenth <= unhappines <= 15*lenth:
+                print(" і зараз ми почуваемося не сказати щоб добре")
             else:
-                m = "жахливо"
+                print(" і зараз ми почуваемося жахливо")
         
         # годування звірятка
         elif choice == "2":
             food = int(input("скільки їжі насипати: "))
-            pet.eat(food)
+            for i in range(lenth):
+                list_pet[i].eat(food)
          
         # гра зі звірятком
         elif choice == "3":
-            fan = int(input("скільки годин грати: "))
-            pet.play(fan)
-        
-        elif choice == "3":
-            pet_name = input("Як ви назвете своє звірятко?: ")
-            pet = Pet(pet_name)
-            
-        
+            fun = int(input("скільки годин грати: "))
+            for i in range(lenth):
+                list_pet[i].play(fun)
+
         # back_door
         elif choice == "back_door":
-                print(pet)
+                print(list_pet)
 
         # незрозуміле введення користувача
         else:
