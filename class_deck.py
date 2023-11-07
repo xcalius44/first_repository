@@ -1,9 +1,6 @@
-import class_card
 from class_card import Card
-import class_Hand
 from class_Hand import Hand
 class Deck(Hand):
-    
     
     def populate(self):
         for suit in Card.SUITS:
