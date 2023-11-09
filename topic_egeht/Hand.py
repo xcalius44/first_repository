@@ -1,8 +1,7 @@
 class Hand:
     
-    def __init__(self, name):
+    def __init__(self):
         self.cards = []
-        self.name = name
         
     def __str__(self):
         if self.cards:
@@ -22,3 +21,4 @@ class Hand:
     def give(self, card, other_hand):
         self.cards.remove(card)
         other_hand.add(card)
+        

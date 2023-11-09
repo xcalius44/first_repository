@@ -1,5 +1,4 @@
 class Card:
-    """  """
     
     RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
     
@@ -13,6 +12,7 @@ class Card:
     def __str__(self):
         rep =self.rank + self.suit
         return rep
+    
 class Hand:
     
     def __init__(self):
@@ -36,8 +36,8 @@ class Hand:
     def give(self, card, other_hand):
         self.cards.remove(card)
         other_hand.add(card)
+        
 class Deck(Hand):
-    
     
     def populate(self):
         for suit in Card.SUITS:
@@ -86,4 +86,6 @@ print(deck1)
 
 deck1.clear()
 print(deck1)
+your_hand.clear()
+print(your_hand)
  
