@@ -1,6 +1,6 @@
 import string
 class Alphabet:
-    def __init__(self ,lang ,letters):
+    def __init__(self, lang, letters):
         self.lang = lang
         self.letters = list(letters)
         

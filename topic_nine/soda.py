@@ -1,11 +1,11 @@
 class Soda():
 
-    def __init__(self , saplement):
-        self.saplement = saplement
+    def __init__(self , supplement):
+        self.supplement = supplement
 
     def show_my_drink(self):
-        if self.saplement != 'no_saplement':
-            print('Газована вода та ' ,self.saplement)
+        if self.supplement != 'no_supplement':
+            print('Газована вода та ' ,self.supplement)
         else:
             print('Звичайна газована вода')
 
