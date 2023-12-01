@@ -94,7 +94,7 @@ if __name__ == "__main__":
     
     card2  = Unprintabale_Card("T", Card.SUITS[1])
     
-    card3  = Positionabele_Card("T", Card.SUITS[2])
+    card3  = Positionable_Card("T", Card.SUITS[2])
     
     print("Card object:", card1) 
     
