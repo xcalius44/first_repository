@@ -20,7 +20,7 @@ class Unprintabale_Card(Card):
     def __str__(self):
         return "<error_printing>"
 
-class Positionabele_Card(Card):
+class Positionable_Card(Card):
     
     def __init__(self, rank, suit, is_fase_up = True):
         super().__init__(rank, suit)

@@ -1,7 +1,7 @@
 def ask_yes_no (question):
     response = None
     while response not in ("y","n"):
-        response  = input(question) + '(y/n)?'.lower()
+        response  = input(question).lower()
     return response
 
 def ask_number(question, low, high):

@@ -1,6 +1,6 @@
 import Cards, Games
 
-class BJ_Card(Cards.Positionabele_Card):
+class BJ_Card(Cards.Positionable_Card):
     ACE_VALUE = 1
     
     @property
@@ -56,7 +56,7 @@ class BJ_Player(BJ_Hand):
     def is_hitting(self):
         response = Games.ask_yes_no("\n" + self.name +
                 ", taking more cards: ")
-        return response 
+        return response == "y"
     
     def bust(self):
         print(self.name, "uliminated.")
@@ -74,7 +74,7 @@ class BJ_Player(BJ_Hand):
 class BJ_Dealer(BJ_Hand):
     
     def is_hitting(self):
-        return self.total < 17
+        return self.total < 7
     
     def bust(self):
         print(self.name, "uliminated.")
@@ -97,6 +97,7 @@ class BJ_Game:
         self.deck.populate()
         self.deck.shuffle()
     
+    @property
     def still_playing(self):
         sp = []
         for player in self.players:
@@ -109,7 +110,7 @@ class BJ_Game:
             self.deck.deal([player])
             print(player)
             if player.is_busted():
-                player.bast()
+                player.bust()
     
     def play(self):
         self.deck.deal(self.players + [self.dealer],
@@ -130,11 +131,11 @@ class BJ_Game:
             print(self.dealer)
             self.__additional_cards(self.dealer)
         if self.dealer.is_busted():
-            for player in self. still_playing:
+            for player in self.still_playing:
                 player.win()
         else:
-            for player in self.still_plaing:
-                if player in self.dealer.total:
+            for player in self.still_playing:
+                if player.total > self.dealer.total:
                     player.win()
                 elif player.total < self.dealer.total:
                     player.lose()
@@ -145,13 +146,13 @@ class BJ_Game:
         self.dealer.clear()
 
 def main():
-    print("\t\tgame bleak-jeka")
+    print("\t\tgame black-jeck")
     
     names = []
-    number = Games.ask_number("how many playrs (1 - 7): ",
+    number = Games.ask_number("how many players (1 - 7): ",
                               low = 1, high = 7)
     for i in range(number):
-        name = input("playes name " + str(i + 1) + ":")
+        name = input("players name " + str(i + 1) + ": ")
         names.append(name)
     print()
     
