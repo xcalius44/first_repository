@@ -15,12 +15,12 @@ class Card:
         rep = self.rank + self.suit
         return rep
 
-class Unprintabale_Card(Card):
+class Unprintable_Card(Card):
 
     def __str__(self):
         return "<error_printing>"
 
-class Positionable_Card(Card):
+class Positionabl_Card(Card):
     
     def __init__(self, rank, suit, is_fase_up = True):
         super().__init__(rank, suit)
@@ -60,6 +60,9 @@ class Hand:
         self.cards.remove(card)
         other_hand.add(card)
     
+    # def show(self, card, other_hand):
+    #     other_hand.add(card)
+    
 class Deck(Hand):
 
     def populate(self):
@@ -82,7 +85,7 @@ class Deck(Hand):
                     top_card = self.cards[0]
                     self.give(top_card, hand)
                 else:
-                    print("end of deck")
+                    return "end of deck"      
                     
 if __name__ == "__main__":
     print("You have started the cards module, "
@@ -92,19 +95,19 @@ if __name__ == "__main__":
     
     card1  = Card("T", Card.SUITS[0])
     
-    card2  = Unprintabale_Card("T", Card.SUITS[1])
+    card2  = Unprintable_Card("T", Card.SUITS[1])
     
-    card3  = Positionable_Card("T", Card.SUITS[2])
+    card3  = Positionable._Card("T", Card.SUITS[2])
     
     print("Card object:", card1) 
     
     print("Unprintable_Card object:", card2)
     
-    print("Positionable_Card object:", card3)
+    print("Positionable._Card object:", card3)
           
     card3.flip()
 
-    print("Turning the Positionable_Card object:", card3)
+    print("Turning the Positionable._Card object:", card3)
     
     deck1  = Deck()
 
@@ -126,7 +129,7 @@ if __name__ == "__main__":
 
     print("\n5 cards dealt.")
 
-    print("handl:", hand1)
+    print("hand1:", hand1)
 
     print("hand2:", hand2)
 

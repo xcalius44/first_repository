@@ -1,6 +1,7 @@
 import Cards, Games
 
-class BJ_Card(Cards.Positionable_Card):
+
+class BJ_Card(Cards.Positionabl_Card):
     ACE_VALUE = 1
     
     @property
@@ -59,8 +60,11 @@ class BJ_Player(BJ_Hand):
         return response == "y"
     
     def bust(self):
-        print(self.name, "uliminated.")
+        print(self.name, "excluded.")
         self.lose()
+    
+    def fold(self):
+        print(self.name, "fold.")
     
     def lose(self):
         print(self.name, "lose.")
@@ -69,7 +73,7 @@ class BJ_Player(BJ_Hand):
         print(self.name, "win.")
     
     def push(self):
-        print(self.name, "play droa.")
+        print(self.name, "play draw.")
     
 class BJ_Dealer(BJ_Hand):
     
@@ -77,7 +81,7 @@ class BJ_Dealer(BJ_Hand):
         return self.total < 7
     
     def bust(self):
-        print(self.name, "uliminated.")
+        print(self.name, "excluded.")
     
     def flip_first_card(self):
         first_card = self.cards[0]
@@ -85,10 +89,10 @@ class BJ_Dealer(BJ_Hand):
 
 class BJ_Game:
     
-    def __init__(self, names):
+    def __init__(self, players):
         self.players = []
-        for name in names:
-            player = BJ_Player(name)
+        for name, dolor in players.items:
+            player = BJ_Player(name,dolor)
             self.players.append(player)
         
         self.dealer = BJ_Dealer("Dealer")
@@ -112,10 +116,24 @@ class BJ_Game:
             if player.is_busted():
                 player.bust()
     
+    def __beting(self):
+        for player in self.players.copy():
+            if player.dolors < min_bet:
+                self.players.remove(player)
+                print("Player ", player.name , " delete with ", player.dolors , " dolors.")
+                continue
+            bet_value = Games.ask_number("Your bet ",player.name,min_bet - player.dolor, ":", min_bet, player.dolor)
+        player.bet(bet_value)
+    
     def play(self):
+        
+        if len(self.deck.cards) < (len(self.players) + 1)* 2:
+            self.add_new_deck()
+        
         self.deck.deal(self.players + [self.dealer],
                        per_hand = 2)
         self.dealer.flip_first_card()
+        
         for player in self. players:
             print(player)
         print(self.dealer)
@@ -139,6 +157,8 @@ class BJ_Game:
                     player.win()
                 elif player.total < self.dealer.total:
                     player.lose()
+                elif ask_yes_no("are you playing?"):
+                    player.fold()
                 else:
                     player.push()
         for player in self.players:
@@ -146,7 +166,7 @@ class BJ_Game:
         self.dealer.clear()
 
 def main():
-    print("\t\tgame black-jeck")
+    print("\t\tgame black-jack")
     
     names = []
     number = Games.ask_number("how many players (1 - 7): ",
@@ -155,10 +175,11 @@ def main():
         name = input("players name " + str(i + 1) + ": ")
         names.append(name)
     print()
-    
+    count = 0
     game = BJ_Game(names)
     again = None
     while again != "n":
+        count += 2 * len(names) + 1
         game.play()
         again = Games.ask_yes_no("\play again")
 main()
