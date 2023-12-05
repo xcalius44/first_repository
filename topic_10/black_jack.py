@@ -91,8 +91,8 @@ class BJ_Game:
     
     def __init__(self, players):
         self.players = []
-        for name, dolor in players.items:
-            player = BJ_Player(name,dolor)
+        for name, dolors in players.items:
+            player = BJ_Player(name,dolors)
             self.players.append(player)
         
         self.dealer = BJ_Dealer("Dealer")
@@ -118,11 +118,11 @@ class BJ_Game:
     
     def __beting(self):
         for player in self.players.copy():
-            if player.dolors < min_bet:
+            if player.dolorss < min_bet:
                 self.players.remove(player)
-                print("Player ", player.name , " delete with ", player.dolors , " dolors.")
+                print("Player ", player.name , " delete with ", player.dolorss , " dolorss.")
                 continue
-            bet_value = Games.ask_number("Your bet ",player.name,min_bet - player.dolor, ":", min_bet, player.dolor)
+            bet_value = Games.ask_number("Your bet ",player.name,min_bet - player.dolors, ":", min_bet, player.dolors)
         player.bet(bet_value)
     
     def play(self):
@@ -168,14 +168,16 @@ class BJ_Game:
 def main():
     print("\t\tgame black-jack")
     
-    names = []
+    players = {}
     number = Games.ask_number("how many players (1 - 7): ",
                               low = 1, high = 7)
     for i in range(number):
         name = input("players name " + str(i + 1) + ": ")
-        names.append(name)
+        dolors = game.ask_number(name," money: " ,min_bet ,min_bet * 100)
+        
+        players[name] = dolors
     print()
-    count = 0
+
     game = BJ_Game(names)
     again = None
     while again != "n":
