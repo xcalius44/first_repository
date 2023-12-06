@@ -1,5 +1,6 @@
 import Cards, Games
 
+min_bet = 5
 
 class BJ_Card(Cards.Positionabl_Card):
     ACE_VALUE = 1
@@ -54,6 +55,10 @@ class BJ_Hand(Cards.Hand):
     
 class BJ_Player(BJ_Hand):
     
+    def __init__(self, name, dolors):
+        super().__init__(name)
+        self.dolors = dolors
+    
     def is_hitting(self):
         response = Games.ask_yes_no("\n" + self.name +
                 ", taking more cards: ")
@@ -70,10 +75,27 @@ class BJ_Player(BJ_Hand):
         print(self.name, "lose.")
     
     def win(self):
+        self.dolors += 2 * self.bet_value
         print(self.name, "win.")
     
     def push(self):
+        self.dolors += self.bet_value
         print(self.name, "play draw.")
+    
+    def bet(self ,bet_value):
+        if bet_value > self.dolors:
+            return False
+        self.bet_value = bet_value
+        self.dolors -= self.bet_value
+        return bet_value
+    
+    def fold(self):
+        self.dolors += int(self.bet_value * 0.5)
+        self.clear()
+        print(self.name, "fold")
+    
+    def is_fold(self):
+        return len(self.cards) == 0
     
 class BJ_Dealer(BJ_Hand):
     
@@ -91,7 +113,7 @@ class BJ_Game:
     
     def __init__(self, players):
         self.players = []
-        for name, dolors in players.items:
+        for name, dolors in players.items():
             player = BJ_Player(name,dolors)
             self.players.append(player)
         
@@ -116,15 +138,22 @@ class BJ_Game:
             if player.is_busted():
                 player.bust()
     
-    def __beting(self):
+    def __betting(self):
         for player in self.players.copy():
-            if player.dolorss < min_bet:
+            if player.dolors < min_bet:
                 self.players.remove(player)
-                print("Player ", player.name , " delete with ", player.dolorss , " dolorss.")
+                print("Player ", player.name, " delete with ", player.dolors, " dolors")
                 continue
-            bet_value = Games.ask_number("Your bet ",player.name,min_bet - player.dolors, ":", min_bet, player.dolors)
-        player.bet(bet_value)
+            bet_value = Games.ask_number(f"Your bet {player.name}, money {player.dolors}:", min_bet, player.dolors)
+            player.bet(bet_value)
     
+    def __ask_fold(self, player):
+        answer = Games.ask_yes_no(f"{player} do you want fold")
+        if answer == "y":
+            player.fold()
+            return True
+        return False
+        
     def play(self):
         
         if len(self.deck.cards) < (len(self.players) + 1)* 2:
@@ -134,10 +163,14 @@ class BJ_Game:
                        per_hand = 2)
         self.dealer.flip_first_card()
         
-        for player in self. players:
+        for player in self.players:
             print(player)
         print(self.dealer)
         
+        self.__betting()
+        for player in self.players:
+            self.__ask_fold(player)
+            
         for player in self.players:
             self.__additional_cards(player)
         
@@ -173,15 +206,13 @@ def main():
                               low = 1, high = 7)
     for i in range(number):
         name = input("players name " + str(i + 1) + ": ")
-        dolors = game.ask_number(name," money: " ,min_bet ,min_bet * 100)
-        
+        dolors = Games.ask_number(f"{name} money: ",min_bet ,min_bet * 100)
         players[name] = dolors
     print()
 
-    game = BJ_Game(names)
+    game = BJ_Game(players)
     again = None
     while again != "n":
-        count += 2 * len(names) + 1
         game.play()
-        again = Games.ask_yes_no("\play again")
+        again = Games.ask_yes_no("\nplay again")
 main()
