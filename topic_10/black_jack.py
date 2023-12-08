@@ -2,12 +2,12 @@ import Cards, Games
 
 min_bet = 5
 
-class BJ_Card(Cards.Positionabl_Card):
+class BJ_Card(Cards.Position_able_Card):
     ACE_VALUE = 1
     
     @property
     def value(self):
-        if self.is_fase_up:
+        if self.is_face_up:
             v = BJ_Card.RANKS.index(self.rank) + 1
             if v > 10:
                 v = 10

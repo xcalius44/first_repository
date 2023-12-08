@@ -20,7 +20,7 @@ class Unprintable_Card(Card):
     def __str__(self):
         return "<error_printing>"
 
-class Positionabl_Card(Card):
+class Position_able_Card(Card):
     
     def __init__(self, rank, suit, is_fase_up = True):
         super().__init__(rank, suit)
@@ -99,17 +99,17 @@ if __name__ == "__main__":
     
     card2  = Unprintable_Card("T", Card.SUITS[1])
     
-    card3  = Positionable._Card("T", Card.SUITS[2])
+    card3  = Position_able._Card("T", Card.SUITS[2])
     
     print("Card object:", card1) 
     
     print("Unprintable_Card object:", card2)
     
-    print("Positionable._Card object:", card3)
+    print("Position_able._Card object:", card3)
           
     card3.flip()
 
-    print("Turning the Positionable._Card object:", card3)
+    print("Turning the Position_able._Card object:", card3)
     
     deck1  = Deck()
 
