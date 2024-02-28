@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 
+
 class Alien(Sprite):
 
     def __init__(self, ai_game):
@@ -8,12 +9,11 @@ class Alien(Sprite):
         self.screen = ai_game.screen
         self.settings = ai_game.settings
 
-        self.image = pygame.image.load("alien.bmp")
+        filename = ("alian.bmp")
+        self.image = pygame.image.load(filename)
         self.rect = self.image.get_rect()
-        
         self.rect.x = self.rect.width
         self.rect.y = self.rect.height
-
         self.x = float(self.rect.x)
 
     def check_edges(self):
