@@ -3,10 +3,10 @@ from time import sleep
 
 import pygame
 
-from setings import Settings
+from settings import Settings
 from ship import Ship
 from Bullet import Bullet
-from alian import Alien
+from alien import Alien
 from game_stats import GameStats
 from button import Button
 from scoreboard import Scoreboard
