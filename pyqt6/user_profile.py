@@ -17,7 +17,7 @@ class MainWindow(QWidget):
         self.show()
 
     def createImageLabels(self):
-        images = ["skyblue.png", "profile_image.png"]
+        images = ["images/skyblue.png", "images/profile_image.png"]
         for image in images:
             try:
                 with open(image):
@@ -31,57 +31,58 @@ class MainWindow(QWidget):
 
     def setUpMainWindow(self):
         self.createImageLabels()
+
         user_label = QLabel(self)
-        user_label.setText("Roman Yatsenko")
+        user_label.setText("Роман Яценко")
         user_label.setFont(QFont("Arial", 20))
-        user_label.move(85, 140)
+        user_label.move(55, 140)
 
         bio_label = QLabel(self)
-        bio_label.setText("Biography")
+        bio_label.setText("Біографія")
         bio_label.setFont(QFont("Arial", 17))
         bio_label.move(15, 170)
 
         about_label = QLabel(self)
         about_label.setText(
-            "I am a programming teacher with 20 years of experience_ I love Python"
+            "Я - викладач програмування з 20-річним досвідом. Полюбляю Python"
         )
         about_label.setWordWrap(True)
-        about_label.move(15, 100)
+        about_label.move(15, 195)
 
         skills_label = QLabel(self)
-        skills_label.setText("thno")
+        skills_label.setText("Технології")
         skills_label.setFont(QFont("Arial", 17))
         skills_label.move(15, 240)
 
         languages_label = QLabel(self)
         languages_label.setText("Python | PyGame | PyQt | Django")
-        languages_label.move(15, 268)
+        languages_label.move(15, 265)
 
         experience_label = QLabel(self)
-        experience_label.setText("Experience")
+        experience_label.setText("Досвід")
         experience_label.setFont(QFont("Arial", 17))
         experience_label.move(15, 290)
 
         developer_label = QLabel(self)
-        developer_label.setText("Python-Developer")
-        developer_label.move(15, 310)
+        developer_label.setText("Python-Розробник")
+        developer_label.move(15, 320)
 
         dev_dates_label = QLabel(self)
-        dev_dates_label.setText("September 2022 to present")
+        dev_dates_label.setText("Вересень 2022 - по теперішній час")
         dev_dates_label.setFont(QFont("Arial", 10))
-        developer_label.move(15, 330)
+        dev_dates_label.move(15, 340)
 
         html_label = QLabel(self)
-        html_label.setText("HTML-Beрстальник")
-        html_label.move(15, 350)
+        html_label.setText("HTML-Верстальник")
+        html_label.move(15, 360)
 
         html_dates_label = QLabel(self)
-        html_dates_label.setText("January 2020 - May")
+        html_dates_label.setText("Січень 2020 - Травень 2022")
         html_dates_label.setFont(QFont("Arial", 10))
-        html_dates_label.move(15, 330)
+        html_dates_label.move(15, 380)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainWindow()
-    sys.exit(app.exit())
+    sys.exit(app.exec())
