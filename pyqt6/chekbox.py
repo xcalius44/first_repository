@@ -5,14 +5,12 @@ from PyQt6.QtCore import Qt
 
 
 class MainWindow(QWidget):
-    """Клас для головного вікна"""
 
     def __init__(self):
         super().__init__()
         self.initializeUI()
 
     def initializeUI(self):
-        """Налаштування застосунку"""
         self.setGeometry(100, 100, 250, 150)
         self.setWindowTitle("QChackBox Example")
         self.setUpMainWindow()
@@ -39,7 +37,6 @@ class MainWindow(QWidget):
         django_cb.toggled.connect(self.printSelected)
 
     def printSelected(self, checked):
-        """Виводе стан ChckBox"""
         sender = self.sender()
         if checked:
             print(f"{sender.text()} обрано")
